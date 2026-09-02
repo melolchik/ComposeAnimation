@@ -1,9 +1,16 @@
 package ru.melolchik.composeanimation.ui.screen
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -46,7 +53,23 @@ fun Test() {
         }
 
         val size = animateDpAsState(
-            targetValue = if(isIncreased) 200.dp else 100.dp)
+            targetValue = if(isIncreased) 200.dp else 100.dp,
+            animationSpec = infiniteRepeatable(
+                animation = tween (3000),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
+
+        val infiniteTransition = rememberInfiniteTransition()
+
+        val transitionSize by infiniteTransition.animateFloat(
+            initialValue = 200f,
+            targetValue = 100f,
+            animationSpec = infiniteRepeatable(
+                animation = tween (3000),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
 
         var isCircle : Boolean by remember {
             mutableStateOf(false)
@@ -91,7 +114,7 @@ fun Test() {
             )
         }
         AnimatedContainer(
-            size = size.value ,
+            size = transitionSize.dp ,
             text = "Size"
         )
         Button(
