@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import ru.melolchik.composeanimation.ui.screen.AnimatableExample
 import ru.melolchik.composeanimation.ui.screen.AnimateContent
 import ru.melolchik.composeanimation.ui.screen.Test
 import ru.melolchik.composeanimation.ui.theme.ComposeAnimationTheme
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                         .statusBarsPadding(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AnimateContent()
+                    AnimatableExample()
                 }
             }
         }
